@@ -1,16 +1,24 @@
 package baseball.domain;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import static camp.nextstep.edu.missionutils.Randoms.pickNumberInRange;
 
 public class MyModel {
     private final int BASEBALL_MAX = 999;
     private final int BASEBALL_MIN = 111;
+    private int checkDupNumber[] = new int[10]; //checkDupNumber[i] -> 0 : i는 현재 선출되지 않음. / 1 -> i는 이미 선출되어 answer에 추가하면 안됨.
     private String answer="";
     private boolean isEnd=false;
 
 
     public void initGame(){
+        initDupCheckList();
         generateRandomNumber();
+
         isEnd = false;
     }
 
@@ -28,6 +36,8 @@ public class MyModel {
         return true;
 
     }
+
+
 
     public String getAnswer() {
         return answer;
@@ -70,9 +80,24 @@ public class MyModel {
         return checkInputWithoutZero(input,--index);
     }
 
+
     private void generateRandomNumber(){
         for(int i=0;i<3;i++)
-            answer+=String.valueOf(pickNumberInRange(1,9));
+            answer+=String.valueOf(getNumberNotDuplicate());
+    }
+    private int getNumberNotDuplicate(){
+        int value=0;
+        while(checkDupNumber[value] !=0){
+            value = pickNumberInRange(1,9);
+        }
+        checkDupNumber[value]++;
+        return value;
+    }
+    private void initDupCheckList(){
+        Arrays.fill(checkDupNumber,0);
+        checkDupNumber[0] = 1; // 0은 선출되면 안되므로 1로 Setting
+
+
     }
 
 }
