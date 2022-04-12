@@ -57,7 +57,7 @@ public class MyModel {
     private boolean validateInputInGame(int input){
         if(isEnd)
             return true;
-        return checkInputWithRange(input) && checkInputWithoutZero(input,2);
+        return checkInputWithRange(input) && checkInputWithoutZero(input,2) && checkInputDuplicateNumber(input);
     }
     private int parseStringToInteger(String input){
         try{
@@ -96,8 +96,13 @@ public class MyModel {
     private void initDupCheckList(){
         Arrays.fill(checkDupNumber,0);
         checkDupNumber[0] = 1; // 0은 선출되면 안되므로 1로 Setting
-
-
+    }
+    private boolean checkInputDuplicateNumber(int input){
+        String source = String.valueOf(input);
+        Set<Character> sourceCharacters = new HashSet<>();
+        for(int i=0;i<source.length();i++)
+            sourceCharacters.add(source.charAt(i));
+        return sourceCharacters.size()==3;
     }
 
 }
