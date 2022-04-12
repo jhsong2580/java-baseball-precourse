@@ -40,14 +40,14 @@ class MyModelTest {
 
     @ParameterizedTest
     @DisplayName("게임중일때 입력값이 111~999숫자이고 0이 들어가지 않으면 정상")
-    @ValueSource(strings = {"111","999","142","346","677","232","0921"})
+    @ValueSource(strings = {"142","346","0921","426","987","123","972","184"})
     public void validateNormalInputWhileGaming(String input){
         Assertions.assertThat(myModel.validateInput(input)).isTrue();
     }
     
     @ParameterizedTest
-    @DisplayName("게임중일때 입력값이 111~999숫자가 아니고 0이 들어가있으면 비정상")
-    @ValueSource(strings = {"100","99","1000","1111","203","410","013","010","870","a","-1"})
+    @DisplayName("게임중일때 입력값이 111~999숫자가 아니고 0이 들어가있거나 중복된 숫자가 들어가있으면 비정상")
+    @ValueSource(strings = {"100","99","1000","1111","203","410","013","010","870","a","-1","113","442","101","111","114","999"})
     public void validateAbnormalInputWhileGaming(String input){
         Assertions.assertThatThrownBy(() -> myModel.validateInput(input))
                 .isInstanceOf(IllegalArgumentException.class);
