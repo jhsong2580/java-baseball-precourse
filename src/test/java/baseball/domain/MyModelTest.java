@@ -1,6 +1,5 @@
 package baseball.domain;
 
-import jdk.jfr.Description;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -8,7 +7,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 class MyModelTest {
     MyModel myModel = new MyModel();
@@ -19,7 +21,7 @@ class MyModelTest {
     }
 
     @Test
-    @DisplayName("initGame 후에 answer엔 1~9숫자 3개로 이루어진 값이 들어있고, isEnd엔 false가 들어가있다.")
+    @DisplayName("initGame 후에 answer엔 1~9숫자 3개로 이루어진 값이 들어있고, isEnd엔 false가 들어가있다. 각자리 숫자는 모두 다르다.")
     public void initGameTest (){
         //given
         String answer = myModel.getAnswer();
@@ -31,6 +33,9 @@ class MyModelTest {
                 .isLessThanOrEqualTo(999);
         Assertions.assertThat(answer)
                 .doesNotContain("0");
+        Assertions.assertThat(convertStringToCharSet(answer).size())
+                .isEqualTo(3);
+
     }
 
     @ParameterizedTest
@@ -63,4 +68,11 @@ class MyModelTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
+    private Set<Character> convertStringToCharSet(String source){
+        Set<Character> result = new HashSet();
+        for(int i=0;i<source.length();i++){
+            result.add(source.charAt(i));
+        }
+        return result;
+    }
 }
