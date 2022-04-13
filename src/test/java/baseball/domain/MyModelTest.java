@@ -5,12 +5,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.lang.reflect.Array;
+import java.util.*;
 
 class MyModelTest {
     MyModel myModel = new MyModel();
@@ -68,9 +67,24 @@ class MyModelTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    private Set<Character> convertStringToCharSet(String source){
+    @ParameterizedTest
+    @DisplayName("낫싱&볼&스트라이크 테스트")
+    @CsvSource(value = {"143:1:0:0","253:1:0:0","972:0:2:0","472:0:3:0","195:0:0:1"},delimiter = ':')
+    public void calcBallStrikeCountTest(String input,String ballCount, String strikeCount, String isNothing){
+        myModel.setAnswer("472");
+        List<Integer> result = myModel.calcBallStrikeCount(input);
+        Assertions.assertThat(result)
+                .isNotEmpty()
+                .containsExactly(Integer.parseInt(ballCount), Integer.parseInt(strikeCount), Integer.parseInt(isNothing));
+
+
+
+    }
+
+    private Set<Character> convertStringToCharSet(String source) {
+
         Set<Character> result = new HashSet();
-        for(int i=0;i<source.length();i++){
+        for (int i = 0; i < source.length(); i++) {
             result.add(source.charAt(i));
         }
         return result;
