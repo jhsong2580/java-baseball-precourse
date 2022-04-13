@@ -33,14 +33,17 @@ class MyViewTest {
             "0:3:0:3스트라이크"
     }, delimiter = ':')
     public void testPrintGuessResult(String ball, String strike, String isNothing, String output) {
+        //given
         int ball_ = Integer.parseInt(ball);
         int strike_ = Integer.parseInt(strike);
         int isNothing_ = Integer.parseInt(isNothing);
-
         OutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
 
+        //when
         myView.printGuessResult(strike_, ball_, isNothing_);
+
+        //then
         Assertions.assertThat(output.trim()).isEqualTo(out.toString().trim());
     }
 }
