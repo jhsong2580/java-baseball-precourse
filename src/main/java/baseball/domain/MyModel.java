@@ -37,6 +37,34 @@ public class MyModel {
 
     }
 
+    public List<Integer> calcBallStrikeCount(String input){
+        ArrayList<Integer> result = new ArrayList<>();
+        int matchCount = calcMatchCount(input, input.length() - 1);
+        int strikeCount = calcStrikeCount(input, input.length() - 1);
+        int isNothing =1- (int) Math.ceil(matchCount/ (double)input.length());
+        result.add(matchCount - strikeCount); //ball Count
+        result.add(strikeCount); //strikeCount
+        result.add(isNothing); //isNothing
+        return result;
+    }
+
+    private int calcStrikeCount(String input,int index){
+        if (index <0)
+            return 0;
+        int isStrike  = 1 & Boolean.hashCode(input.charAt(index) == answer.charAt(index)) >> 1;
+        return isStrike + calcStrikeCount(input, index -1);
+    }
+    private int calcMatchCount(String input,int index){
+        if(index<0)
+            return 0;
+        char[] answerToChar = answer.toCharArray();
+        int matchingCount=input.length();
+        for(int i=0;i<answerToChar.length;i++){
+
+            matchingCount -=(int)Math.ceil(Math.abs(answerToChar[i] - input.charAt(index)) / 8.0);
+        }
+        return matchingCount + calcMatchCount(input,index-1);
+    }
 
 
     public String getAnswer() {
