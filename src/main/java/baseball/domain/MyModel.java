@@ -1,9 +1,6 @@
 package baseball.domain;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static camp.nextstep.edu.missionutils.Randoms.pickNumberInRange;
 
@@ -14,6 +11,9 @@ public class MyModel {
     private String answer="";
     private boolean isEnd=false;
 
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
 
     public void initGame(){
         initDupCheckList();
