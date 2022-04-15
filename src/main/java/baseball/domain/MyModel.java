@@ -26,9 +26,7 @@ public class MyModel {
     }
 
     public boolean validateInput(String input){
-
         int inputCast = parseStringToInteger(input);
-
         boolean validateResult = validateInputNotInGame(inputCast) && validateInputInGame(inputCast);
         if(!validateResult)
             throw new IllegalArgumentException();
@@ -51,7 +49,6 @@ public class MyModel {
         return strikeCount == BASEBALL_ANSWER_SIZE;
     }
 
-
     private int calcStrikeCount(String input){
         int strikeCount = 0;
         for(int i=0;i<BASEBALL_ANSWER_SIZE;i++){
@@ -59,7 +56,6 @@ public class MyModel {
         }
         return strikeCount;
     }
-
 
     private int calcMatchCount(String input){
         boolean[] numbersOfInput = initDupCheckList();
@@ -73,7 +69,6 @@ public class MyModel {
         return matchCount;
     }
 
-
     private boolean validateInputNotInGame(int input){
          return !isEnd || checkInputForGameContinue(input);
     }
@@ -81,9 +76,11 @@ public class MyModel {
     private boolean checkInputForGameContinue(int input){
         return input == CONTINUE_GAME || input == END_GAME;
     }
+
     private boolean validateInputInGame(int input){
         return isEnd || (checkInputWithRange(input) && checkInputWithoutZero(input) && checkInputDuplicateNumber(input));
     }
+
     private int parseStringToInteger(String input){
         try{
             return Integer.parseInt(input);
@@ -91,9 +88,11 @@ public class MyModel {
             throw new IllegalArgumentException();
         }
     }
+
     private boolean checkInputWithRange(int input){
         return input >= BASEBALL_MIN && input <= BASEBALL_MAX;
     }
+
     private boolean checkInputWithoutZero(int input){
         boolean isWithoutZero = true;
         String inputCastString = String.valueOf(input);
@@ -103,7 +102,6 @@ public class MyModel {
         return isWithoutZero;
     }
 
-
     private void generateRandomNumber(){
         StringBuilder stringBuilder = new StringBuilder();
         boolean[] checkDupNumber = initDupCheckList();
@@ -111,6 +109,7 @@ public class MyModel {
             stringBuilder.append(getNumberNotDuplicate(checkDupNumber));
         answer = new String(stringBuilder);
     }
+
     private int getNumberNotDuplicate(boolean[] checkDupNumber){
         int value=0;
         while(checkDupNumber[value]){
@@ -119,12 +118,14 @@ public class MyModel {
         checkDupNumber[value] = true;
         return value;
     }
+
     private boolean[] initDupCheckList(){
         boolean checkDupNumber[] = new boolean[10];
         Arrays.fill(checkDupNumber,false);
         checkDupNumber[0] = true;
         return checkDupNumber;
     }
+
     private boolean checkInputDuplicateNumber(int input){
         String source = String.valueOf(input);
         Set<Character> sourceCharacters = new HashSet<>();
