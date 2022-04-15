@@ -61,6 +61,23 @@ class MyViewTest {
 
     }
 
+    @Test
+    @DisplayName("readline으로 들어온 값을 반환한다. ")
+    public void testGetInput (){
+        //given
+        String input = "1";
+        InputStream in = generateInputStream(input);
+        System.setIn(in);
+        OutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
+
+        //when
+        String inputResult = myView.getInput();
+
+        //then
+        Assertions.assertThat(inputResult).isEqualTo(input);
+        Assertions.assertThat(out.toString()).isEqualTo("숫자를 입력해주세요:");
+    }
     private InputStream generateInputStream(String input) {
         return new ByteArrayInputStream(input.getBytes());
     }
