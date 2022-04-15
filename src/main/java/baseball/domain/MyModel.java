@@ -88,7 +88,7 @@ public class MyModel {
         return input == CONTINUE_GAME || input == END_GAME;
     }
     private boolean validateInputInGame(int input){
-        return isEnd || (checkInputWithRange(input) && checkInputWithoutZero(input,BASEBALL_ANSWER_SIZE-1) && checkInputDuplicateNumber(input));
+        return isEnd || (checkInputWithRange(input) && checkInputWithoutZero(input) && checkInputDuplicateNumber(input));
     }
     private int parseStringToInteger(String input){
         try{
@@ -100,14 +100,13 @@ public class MyModel {
     private boolean checkInputWithRange(int input){
         return input >= BASEBALL_MIN && input <= BASEBALL_MAX;
     }
-    private boolean checkInputWithoutZero(int input,int index){
-        if(index == -1)
-            return true;
-        int divResult = (int)(input / Math.pow(10, index));
-        if(divResult == 0)
-            throw new IllegalArgumentException();
-        input -=divResult*Math.pow(10,index);
-        return checkInputWithoutZero(input,--index);
+    private boolean checkInputWithoutZero(int input){
+        boolean isWithoutZero = true;
+        String inputCastString = String.valueOf(input);
+        for(int i=0;i<BASEBALL_ANSWER_SIZE;i++){
+            isWithoutZero = isWithoutZero && (inputCastString.charAt(i)!= '0');
+        }
+        return isWithoutZero;
     }
 
 
