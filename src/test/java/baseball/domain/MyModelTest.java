@@ -81,6 +81,23 @@ class MyModelTest {
 
     }
 
+    @Test
+    @DisplayName("strike갯수와 정답 자릿수가 같으면 true를 반환한다.")
+    public void checkAllStrikeTest() {
+        //given
+        myModel.setAnswer("472");
+
+        //when
+        List<Integer> trueResult = myModel.calcBallStrikeCount("472");
+        boolean isAllStrikeExpectTrue = myModel.checkAllStrike(trueResult.get(1));
+        List<Integer> falseResult = myModel.calcBallStrikeCount("473");
+        boolean isAllStrikeExpectFalse = myModel.checkAllStrike(falseResult.get(1));
+
+        //then
+        Assertions.assertThat(isAllStrikeExpectTrue).isTrue();
+        Assertions.assertThat(isAllStrikeExpectFalse).isFalse();
+    }
+
     private Set<Character> convertStringToCharSet(String source) {
 
         Set<Character> result = new HashSet();
