@@ -12,7 +12,7 @@ import java.lang.reflect.Array;
 import java.util.*;
 
 class MyModelTest {
-    MyModel myModel = new MyModel();
+    MyModel myModel = new MyModel(3);
 
     @BeforeEach
     public void init(){
@@ -24,7 +24,7 @@ class MyModelTest {
     public void initGameTest (){
         //given
         String answer = myModel.getAnswer();
-        boolean isEnd = myModel.isEnd();
+        boolean isEnd = myModel.getIsEnd();
         //then
         Assertions.assertThat(isEnd).isFalse();
         Assertions.assertThat(Integer.parseInt(myModel.getAnswer()))//answer은 111~999내 정의가 된다.
