@@ -20,6 +20,11 @@ public class MyView {
         return readLine();
     }
 
+    public String getInput(){
+        System.out.print("숫자를 입력해주세요:");
+        return readLine();
+    }
+
     private void getPrintStrikeResult(ArrayList result,int strike){
         if(strike>0)
             result.add(strike + "스트라이크");
