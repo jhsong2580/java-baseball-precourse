@@ -8,6 +8,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import java.io.*;
+import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -32,14 +33,16 @@ class MyViewTest {
     }, delimiter = ':')
     public void testPrintGuessResult(String ball, String strike, String isNothing, String output) {
         //given
-        int ball_ = Integer.parseInt(ball);
-        int strike_ = Integer.parseInt(strike);
-        int isNothing_ = Integer.parseInt(isNothing);
+        HashMap<String, Integer> ballStrikeResult = new HashMap<>();
+        ballStrikeResult.put("ball", Integer.parseInt(ball));
+        ballStrikeResult.put("strike", Integer.parseInt(strike));
+        ballStrikeResult.put("matchCount", Integer.parseInt(ball) + Integer.parseInt(strike));
+
         OutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
 
         //when
-        myView.printGuessResult(strike_, ball_, isNothing_);
+        myView.printGuessResult(ballStrikeResult);
 
         //then
         Assertions.assertThat(output.trim()).isEqualTo(out.toString().trim());
