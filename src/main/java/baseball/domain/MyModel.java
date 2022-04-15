@@ -8,7 +8,7 @@ public class MyModel {
     private  int BASEBALL_MAX ;
     private  int BASEBALL_MIN ;
     private int BASEBALL_ANSWER_SIZE;
-    private int checkDupNumber[] = new int[10]; //checkDupNumber[i] -> 0 : i는 현재 선출되지 않음. / 1 -> i는 이미 선출되어 answer에 추가하면 안됨.
+
     private String answer="";
     private boolean isEnd=false;
 
@@ -112,22 +112,24 @@ public class MyModel {
 
     private void generateRandomNumber(){
         StringBuilder stringBuilder = new StringBuilder();
+        boolean[] checkDupNumber = initDupCheckList();
         for(int i=0;i<BASEBALL_ANSWER_SIZE;i++)
-            stringBuilder.append(getNumberNotDuplicate());
+            stringBuilder.append(getNumberNotDuplicate(checkDupNumber));
         answer = new String(stringBuilder);
     }
-    private int getNumberNotDuplicate(){
-        // TODO: 2022-04-15 checkDupNumber -> int[] -> boolean[]
+    private int getNumberNotDuplicate(boolean[] checkDupNumber){
         int value=0;
-        while(checkDupNumber[value] !=0){
+        while(checkDupNumber[value]){
             value = pickNumberInRange(1,9);
         }
-        checkDupNumber[value]++;
+        checkDupNumber[value] = true;
         return value;
     }
-    private void initDupCheckList(){
-        Arrays.fill(checkDupNumber,0);
-        checkDupNumber[0] = 1; // 0은 선출되면 안되므로 1로 Setting
+    private boolean[] initDupCheckList(){
+        boolean checkDupNumber[] = new boolean[10];
+        Arrays.fill(checkDupNumber,false);
+        checkDupNumber[0] = true;
+        return checkDupNumber;
     }
     private boolean checkInputDuplicateNumber(int input){
         String source = String.valueOf(input);
