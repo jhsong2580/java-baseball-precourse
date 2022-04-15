@@ -47,6 +47,10 @@ public class MyModel {
         return result;
     }
 
+    public boolean checkAllStrike(int strikeCount){
+        return strikeCount == BASEBALL_ANSWER_SIZE;
+    }
+
     private void setAnswerCondition(){
         BASEBALL_MAX = (int)Math.pow(10,BASEBALL_ANSWER_SIZE) -1;
         BASEBALL_MIN = (int)Math.pow(10,BASEBALL_ANSWER_SIZE-1);
