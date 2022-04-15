@@ -88,8 +88,6 @@ public class MyModel {
         return input == 1 || input == 2;
     }
     private boolean validateInputInGame(int input){
-        if(isEnd)
-            return true;
         return isEnd || (checkInputWithRange(input) && checkInputWithoutZero(input,BASEBALL_ANSWER_SIZE-1) && checkInputDuplicateNumber(input));
     }
     private int parseStringToInteger(String input){
