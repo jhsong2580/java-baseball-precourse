@@ -7,9 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.io.ByteArrayOutputStream;
-import java.io.OutputStream;
-import java.io.PrintStream;
+import java.io.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -45,5 +43,25 @@ class MyViewTest {
 
         //then
         Assertions.assertThat(output.trim()).isEqualTo(out.toString().trim());
+    }
+
+    @Test
+    public void testActionAfterGameEnd(){
+        //given
+        int wordSize = 3 ;
+        String input = "2";
+        InputStream in = generateInputStream(input);
+        System.setIn(in);
+
+        //when
+        String actionResult = myView.actionAfterGameEnd(wordSize);
+
+        Assertions.assertThat(actionResult).isEqualTo(input);
+
+
+    }
+
+    private InputStream generateInputStream(String input) {
+        return new ByteArrayInputStream(input.getBytes());
     }
 }
