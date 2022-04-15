@@ -82,9 +82,7 @@ public class MyModel {
         return isEnd;
     }
     private boolean validateInputNotInGame(int input){
-        if(!isEnd)
-            return true;
-        return checkInputOneOrTwo(input);
+         return !isEnd || checkInputOneOrTwo(input);
     }
     private boolean checkInputOneOrTwo(int input){
         return input == 1 || input == 2;
@@ -92,7 +90,7 @@ public class MyModel {
     private boolean validateInputInGame(int input){
         if(isEnd)
             return true;
-        return checkInputWithRange(input) && checkInputWithoutZero(input,BASEBALL_ANSWER_SIZE-1) && checkInputDuplicateNumber(input);
+        return isEnd || (checkInputWithRange(input) && checkInputWithoutZero(input,BASEBALL_ANSWER_SIZE-1) && checkInputDuplicateNumber(input));
     }
     private int parseStringToInteger(String input){
         try{
