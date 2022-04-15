@@ -34,14 +34,14 @@ public class MyModel {
 
     }
 
-    public List<Integer> calcBallStrikeCount(String input){
-        ArrayList<Integer> result = new ArrayList<>();
+    public HashMap<String, Integer> calcBallStrikeCount(String input){
+        HashMap<String, Integer> result = new HashMap<>();
+
         int matchCount = calcMatchCount(input);
-        int strikeCount = calcStrikeCount(input);
-        int isNothing =1- (int) Math.ceil(matchCount / (double)BASEBALL_ANSWER_SIZE);
-        result.add(matchCount - strikeCount); //ball Count
-        result.add(strikeCount); //strikeCount
-        result.add(isNothing); //isNothing
+        result.put("matchCount", matchCount);
+        result.put("strike", calcStrikeCount(input));
+        result.put("ball",matchCount - calcStrikeCount(input));
+
         return result;
     }
 
