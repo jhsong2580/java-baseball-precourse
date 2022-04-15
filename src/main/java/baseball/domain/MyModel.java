@@ -67,13 +67,14 @@ public class MyModel {
 
 
     private int calcMatchCount(String input){
-        int[] numbersOfInput = new int[10];
+        boolean[] numbersOfInput = new boolean[10];
+        Arrays.fill(numbersOfInput,false);
         int matchCount = 0;
         for ( int i = 0; i < BASEBALL_ANSWER_SIZE; i++){
-            numbersOfInput[answer.charAt(i) - (int)'0'] += 1;
+            numbersOfInput[answer.charAt(i) - (int)'0'] =true;
         }
         for ( int i = 0; i < BASEBALL_ANSWER_SIZE; i++){
-            matchCount += 1&Boolean.hashCode((numbersOfInput[input.charAt(i) - (int)'0'] + 1)==2) >> 1;
+            matchCount += 1&Boolean.hashCode(numbersOfInput[input.charAt(i) - (int)'0'] ) >> 1;
         }
         return matchCount;
     }
