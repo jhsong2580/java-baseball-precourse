@@ -111,9 +111,10 @@ public class MyModel {
 
 
     private void generateRandomNumber(){
-        // TODO: 2022-04-15 stringBuilder.append() 
+        StringBuilder stringBuilder = new StringBuilder();
         for(int i=0;i<BASEBALL_ANSWER_SIZE;i++)
-            answer+=String.valueOf(getNumberNotDuplicate());
+            stringBuilder.append(getNumberNotDuplicate());
+        answer = new String(stringBuilder);
     }
     private int getNumberNotDuplicate(){
         // TODO: 2022-04-15 checkDupNumber -> int[] -> boolean[]
