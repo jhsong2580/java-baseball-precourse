@@ -52,6 +52,7 @@ public class MyModel {
     }
 
     private void setAnswerCondition(){
+        answer = "";
         BASEBALL_MAX = (int)Math.pow(10,BASEBALL_ANSWER_SIZE) -1;
         BASEBALL_MIN = (int)Math.pow(10,BASEBALL_ANSWER_SIZE-1);
     }
