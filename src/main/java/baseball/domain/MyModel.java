@@ -15,7 +15,7 @@ public class MyModel {
 
 
     public void initGame(){
-        setAnswerCondition(3);
+        setAnswerCondition();
         initDupCheckList();
         generateRandomNumber();
         isEnd = false;
@@ -47,10 +47,9 @@ public class MyModel {
         return result;
     }
 
-    private void setAnswerCondition(int size){
-        BASEBALL_ANSWER_SIZE = size;
-        BASEBALL_MAX = (int)Math.pow(10,size) -1;
-        BASEBALL_MIN = (int)Math.pow(10,size-1);
+    private void setAnswerCondition(){
+        BASEBALL_MAX = (int)Math.pow(10,BASEBALL_ANSWER_SIZE) -1;
+        BASEBALL_MIN = (int)Math.pow(10,BASEBALL_ANSWER_SIZE-1);
     }
     private int calcStrikeCount(String input,int index){
         if (index <0)
@@ -148,5 +147,9 @@ public class MyModel {
 
     public void setAnswer(String answer) {
         this.answer = answer;
+    }
+
+    public MyModel(int BASEBALL_ANSWER_SIZE) {
+        this.BASEBALL_ANSWER_SIZE = BASEBALL_ANSWER_SIZE;
     }
 }
