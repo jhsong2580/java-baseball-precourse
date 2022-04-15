@@ -5,9 +5,9 @@ import java.util.*;
 import static camp.nextstep.edu.missionutils.Randoms.pickNumberInRange;
 
 public class MyModel {
-    private  int BASEBALL_MAX ;
-    private  int BASEBALL_MIN ;
-    private int BASEBALL_ANSWER_SIZE;
+    private final int BASEBALL_MAX ;
+    private final int BASEBALL_MIN ;
+    private final int BASEBALL_ANSWER_SIZE;
     private final int CONTINUE_GAME = 1;
     private final int END_GAME = 2;
     private String answer="";
@@ -16,9 +16,9 @@ public class MyModel {
 
 
     public void initGame(){
-        setAnswerCondition();
-        generateRandomNumber();
         isEnd = false;
+        answer = "";
+        generateRandomNumber();
     }
 
     public void endGame(){
@@ -51,11 +51,7 @@ public class MyModel {
         return strikeCount == BASEBALL_ANSWER_SIZE;
     }
 
-    private void setAnswerCondition(){
-        answer = "";
-        BASEBALL_MAX = (int)Math.pow(10,BASEBALL_ANSWER_SIZE) -1;
-        BASEBALL_MIN = (int)Math.pow(10,BASEBALL_ANSWER_SIZE-1);
-    }
+
     private int calcStrikeCount(String input){
         int strikeCount = 0;
         for(int i=0;i<BASEBALL_ANSWER_SIZE;i++){
@@ -82,7 +78,6 @@ public class MyModel {
          return !isEnd || checkInputForGameContinue(input);
     }
 
-    // TODO: 2022-04-15 1,2 define & method명 변경  
     private boolean checkInputForGameContinue(int input){
         return input == CONTINUE_GAME || input == END_GAME;
     }
@@ -164,5 +159,7 @@ public class MyModel {
 
     public MyModel(int BASEBALL_ANSWER_SIZE) {
         this.BASEBALL_ANSWER_SIZE = BASEBALL_ANSWER_SIZE;
+        this.BASEBALL_MAX = (int)Math.pow(10,BASEBALL_ANSWER_SIZE) -1;
+        this.BASEBALL_MIN = (int)Math.pow(10,BASEBALL_ANSWER_SIZE-1);
     }
 }
