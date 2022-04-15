@@ -3,6 +3,7 @@ package baseball.domain;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -19,17 +20,18 @@ class MyModelTest {
         myModel.initGame();
     }
 
-    @Test
+    @RepeatedTest(20)
     @DisplayName("initGame 후에 answer엔 1~9숫자 3개로 이루어진 값이 들어있고, isEnd엔 false가 들어가있다. 각자리 숫자는 모두 다르다.")
     public void initGameTest (){
         //given
+        myModel.initGame();
         String answer = myModel.getAnswer();
         boolean isEnd = myModel.getIsEnd();
         //then
         Assertions.assertThat(isEnd).isFalse();
         Assertions.assertThat(Integer.parseInt(myModel.getAnswer()))//answer은 111~999내 정의가 된다.
-                .isGreaterThanOrEqualTo(111)
-                .isLessThanOrEqualTo(999);
+                .isGreaterThanOrEqualTo(myModel.getBASEBALL_MIN())
+                .isLessThanOrEqualTo(myModel.getBASEBALL_MAX());
         Assertions.assertThat(answer)
                 .doesNotContain("0");
         Assertions.assertThat(convertStringToCharSet(answer).size())
