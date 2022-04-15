@@ -13,9 +13,6 @@ public class MyModel {
     private boolean isEnd=false;
 
 
-    public void setAnswer(String answer) {
-        this.answer = answer;
-    }
 
     public void initGame(){
         setAnswerCondition(3);
@@ -74,13 +71,6 @@ public class MyModel {
     }
 
 
-    public String getAnswer() {
-        return answer;
-    }
-
-    public boolean isEnd() {
-        return isEnd;
-    }
     private boolean validateInputNotInGame(int input){
          return !isEnd || checkInputOneOrTwo(input);
     }
@@ -136,4 +126,27 @@ public class MyModel {
         return sourceCharacters.size()==BASEBALL_ANSWER_SIZE;
     }
 
+    public int getBASEBALL_MAX() {
+        return BASEBALL_MAX;
+    }
+
+    public int getBASEBALL_MIN() {
+        return BASEBALL_MIN;
+    }
+
+    public int getBASEBALL_ANSWER_SIZE() {
+        return BASEBALL_ANSWER_SIZE;
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public boolean getIsEnd() {
+        return isEnd;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
 }
