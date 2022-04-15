@@ -38,9 +38,9 @@ public class MyModel {
 
     public List<Integer> calcBallStrikeCount(String input){
         ArrayList<Integer> result = new ArrayList<>();
-        int matchCount = calcMatchCount(input, BASEBALL_ANSWER_SIZE - 1);
-        int strikeCount = calcStrikeCount(input, BASEBALL_ANSWER_SIZE - 1);
-        int isNothing =1- (int) Math.ceil(matchCount/ (double)BASEBALL_ANSWER_SIZE);
+        int matchCount = calcMatchCount(input);
+        int strikeCount = calcStrikeCount(input);
+        int isNothing =1- (int) Math.ceil(matchCount / (double)BASEBALL_ANSWER_SIZE);
         result.add(matchCount - strikeCount); //ball Count
         result.add(strikeCount); //strikeCount
         result.add(isNothing); //isNothing
@@ -56,28 +56,33 @@ public class MyModel {
         BASEBALL_MAX = (int)Math.pow(10,BASEBALL_ANSWER_SIZE) -1;
         BASEBALL_MIN = (int)Math.pow(10,BASEBALL_ANSWER_SIZE-1);
     }
-    private int calcStrikeCount(String input,int index){
-        if (index <0)
-            return 0;
-        int isStrike  = 1 & Boolean.hashCode(input.charAt(index) == answer.charAt(index)) >> 1;
-        return isStrike + calcStrikeCount(input, index -1);
-    }
-    private int calcMatchCount(String input,int index){
-        if(index<0)
-            return 0;
-        char[] answerToChar = answer.toCharArray();
-        int matchingCount=BASEBALL_ANSWER_SIZE;
-        for(int i=0;i<answerToChar.length;i++){
-
-            matchingCount -=(int)Math.ceil(Math.abs(answerToChar[i] - input.charAt(index)) / 8.0);
+    private int calcStrikeCount(String input){
+        int strikeCount = 0;
+        for(int i=0;i<BASEBALL_ANSWER_SIZE;i++){
+            strikeCount += 1 & Boolean.hashCode(input.charAt(i) == answer.charAt(i)) >> 1;
         }
-        return matchingCount + calcMatchCount(input,index-1);
+        return strikeCount;
+    }
+
+
+    private int calcMatchCount(String input){
+        int[] numbersOfInput = new int[10];
+        int matchCount = 0;
+        for ( int i = 0; i < BASEBALL_ANSWER_SIZE; i++){
+            numbersOfInput[answer.charAt(i) - (int)'0'] += 1;
+        }
+        for ( int i = 0; i < BASEBALL_ANSWER_SIZE; i++){
+            matchCount += 1&Boolean.hashCode((numbersOfInput[input.charAt(i) - (int)'0'] + 1)==2) >> 1;
+        }
+        return matchCount;
     }
 
 
     private boolean validateInputNotInGame(int input){
          return !isEnd || checkInputOneOrTwo(input);
     }
+
+    // TODO: 2022-04-15 1,2 define & method명 변경  
     private boolean checkInputOneOrTwo(int input){
         return input == 1 || input == 2;
     }
@@ -90,7 +95,6 @@ public class MyModel {
         }catch(NumberFormatException e){
             throw new IllegalArgumentException();
         }
-
     }
     private boolean checkInputWithRange(int input){
         return input >= BASEBALL_MIN && input <= BASEBALL_MAX;
@@ -107,10 +111,12 @@ public class MyModel {
 
 
     private void generateRandomNumber(){
+        // TODO: 2022-04-15 stringBuilder.append() 
         for(int i=0;i<BASEBALL_ANSWER_SIZE;i++)
             answer+=String.valueOf(getNumberNotDuplicate());
     }
     private int getNumberNotDuplicate(){
+        // TODO: 2022-04-15 checkDupNumber -> int[] -> boolean[]
         int value=0;
         while(checkDupNumber[value] !=0){
             value = pickNumberInRange(1,9);
