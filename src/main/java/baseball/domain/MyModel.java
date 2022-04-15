@@ -8,7 +8,8 @@ public class MyModel {
     private  int BASEBALL_MAX ;
     private  int BASEBALL_MIN ;
     private int BASEBALL_ANSWER_SIZE;
-
+    private final int CONTINUE_GAME = 1;
+    private final int END_GAME = 2;
     private String answer="";
     private boolean isEnd=false;
 
@@ -79,12 +80,12 @@ public class MyModel {
 
 
     private boolean validateInputNotInGame(int input){
-         return !isEnd || checkInputOneOrTwo(input);
+         return !isEnd || checkInputForGameContinue(input);
     }
 
     // TODO: 2022-04-15 1,2 define & method명 변경  
-    private boolean checkInputOneOrTwo(int input){
-        return input == 1 || input == 2;
+    private boolean checkInputForGameContinue(int input){
+        return input == CONTINUE_GAME || input == END_GAME;
     }
     private boolean validateInputInGame(int input){
         return isEnd || (checkInputWithRange(input) && checkInputWithoutZero(input,BASEBALL_ANSWER_SIZE-1) && checkInputDuplicateNumber(input));
