@@ -1,6 +1,7 @@
 package baseball.view;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import static camp.nextstep.edu.missionutils.Console.readLine;
@@ -8,9 +9,9 @@ import static camp.nextstep.edu.missionutils.Console.readLine;
 public class MyView {
     public void printGuessResult(int strike, int ball, int isNothing) {
         ArrayList<String> results = new ArrayList<>();
-        getPrintBallResult(results,ball);
-        getPrintStrikeResult(results,strike);
-        getPrintNothingResult(results,isNothing);
+        getPrintBallResult(results, ballStrikeResult.get("ball"));
+        getPrintStrikeResult(results, ballStrikeResult.get("strike"));
+        getPrintNothingResult(results, ballStrikeResult.get("matchCount"));
 
         System.out.println(String.join(" ", results));
     }
@@ -34,7 +35,7 @@ public class MyView {
             result.add(ball+"볼") ;
     }
     private void getPrintNothingResult(ArrayList result,int isNothing){
-        if(isNothing>0)
+        if(isNothing==0)
             result.add("낫싱") ;
     }
 }
