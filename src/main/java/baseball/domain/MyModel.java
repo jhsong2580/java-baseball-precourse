@@ -17,7 +17,6 @@ public class MyModel {
 
     public void initGame(){
         setAnswerCondition();
-        initDupCheckList();
         generateRandomNumber();
         isEnd = false;
     }
@@ -67,8 +66,7 @@ public class MyModel {
 
 
     private int calcMatchCount(String input){
-        boolean[] numbersOfInput = new boolean[10];
-        Arrays.fill(numbersOfInput,false);
+        boolean[] numbersOfInput = initDupCheckList();
         int matchCount = 0;
         for ( int i = 0; i < BASEBALL_ANSWER_SIZE; i++){
             numbersOfInput[answer.charAt(i) - (int)'0'] =true;
