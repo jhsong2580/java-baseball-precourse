@@ -46,7 +46,7 @@ public class MyModel {
         isEnd = true;
     }
 
-    public boolean validateInput(String input) {
+    public String validateInput(String input) {
         int inputCast = parseStringToInteger(input);
         boolean validateResult = true;
         for (int i = 0; i < myValidators.size() & validateResult; i++) {
@@ -56,7 +56,7 @@ public class MyModel {
             System.out.println("게임 종료");
             throw new IllegalArgumentException();
         }
-        return validateResult;
+        return input;
     }
 
     private boolean validateExecute(MyValidator validator, int input) {
