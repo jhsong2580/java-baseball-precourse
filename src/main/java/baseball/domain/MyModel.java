@@ -7,8 +7,6 @@ import java.util.*;
 import static camp.nextstep.edu.missionutils.Randoms.pickNumberInRange;
 
 public class MyModel {
-    private final int BASEBALL_MAX ;
-    private final int BASEBALL_MIN ;
     private final int BASEBALL_ANSWER_SIZE;
     private final int CONTINUE_GAME = 1;
     private final int END_GAME = 2;
@@ -81,40 +79,15 @@ public class MyModel {
         return matchCount;
     }
 
-    private boolean validateInputNotInGame(int input){
-         return !isEnd || checkInputForGameContinue(input);
-    }
-
-    private boolean checkInputForGameContinue(int input){
-        return input == CONTINUE_GAME || input == END_GAME;
-    }
-
-    private boolean validateInputInGame(int input){
-        return isEnd || (checkInputWithRange(input) && checkInputWithoutZero(input) && checkInputDuplicateNumber(input));
-    }
-
-    private int parseStringToInteger(String input){
-        try{
+    private int parseStringToInteger(String input) {
+        try {
             return Integer.parseInt(input);
-        }catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             throw new IllegalArgumentException();
         }
     }
 
-    private boolean checkInputWithRange(int input){
-        return input >= BASEBALL_MIN && input <= BASEBALL_MAX;
-    }
-
-    private boolean checkInputWithoutZero(int input){
-        boolean isWithoutZero = true;
-        String inputCastString = String.valueOf(input);
-        for(int i=0;i<BASEBALL_ANSWER_SIZE;i++){
-            isWithoutZero = isWithoutZero && (inputCastString.charAt(i)!= '0');
-        }
-        return isWithoutZero;
-    }
-
-    private void generateRandomNumber(){
+    private void generateRandomNumber() {
         StringBuilder stringBuilder = new StringBuilder();
         boolean[] checkDupNumber = initBooleanArrayDefaultFalse(10);
         for(int i=0;i<BASEBALL_ANSWER_SIZE;i++)
@@ -136,22 +109,6 @@ public class MyModel {
         Arrays.fill(checkDupNumber,false);
         checkDupNumber[0] = true;
         return checkDupNumber;
-    }
-
-    private boolean checkInputDuplicateNumber(int input){
-        String source = String.valueOf(input);
-        Set<Character> sourceCharacters = new HashSet<>();
-        for(int i=0;i<BASEBALL_ANSWER_SIZE;i++)
-            sourceCharacters.add(source.charAt(i));
-        return sourceCharacters.size()==BASEBALL_ANSWER_SIZE;
-    }
-
-    public int getBASEBALL_MAX() {
-        return BASEBALL_MAX;
-    }
-
-    public int getBASEBALL_MIN() {
-        return BASEBALL_MIN;
     }
 
     public int getBASEBALL_ANSWER_SIZE() {
