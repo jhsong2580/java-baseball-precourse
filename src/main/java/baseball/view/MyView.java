@@ -13,7 +13,7 @@ public class MyView {
     public void printResult(HashMap<String, Integer> ballStrikeResult) {
         ArrayList<String> results = new ArrayList<>();
         for (String key : ballStrikeResult.keySet()) {
-            results.add(formatPrintSource(key, ballStrikeResult.get(key)));
+            formatPrintSource(key, ballStrikeResult.get(key),results);
         }
         System.out.println(String.join(" ", results));
     }
@@ -28,13 +28,9 @@ public class MyView {
         return readLine();
     }
 
-    private String getPrintSource(String key,int data){
-        if(data > 0)
-            return printSources.get(key);
-        return "";
-    }
-    private String formatPrintSource(String key,int data){
-        return String.format(getPrintSource(key,data),data);
+    private void formatPrintSource(String key,int data,ArrayList result){
+        if(data>0)
+            result.add(String.format(printSources.get(key),data));
     }
     public MyView() {
         printSources = new HashMap<>();
