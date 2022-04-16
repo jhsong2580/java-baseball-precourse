@@ -41,7 +41,7 @@ public class MyModel {
         result.put("matchCount", calcMatchCount(input));
         result.put("strike", calcStrikeCount(input));
         result.put("ball",result.get("matchCount") - result.get("strike"));
-
+        result.put("nothing",getIntFromBoolean(result.get("matchCount")==0));
         return result;
     }
 
