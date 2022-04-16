@@ -12,10 +12,9 @@ public class MyView {
     private final HashMap<String,String> printSources ;
     public void printResult(HashMap<String, Integer> ballStrikeResult) {
         ArrayList<String> results = new ArrayList<>();
-        getPrintBallResult(results, ballStrikeResult.get("ball"));
-        getPrintStrikeResult(results, ballStrikeResult.get("strike"));
-        getPrintNothingResult(results, ballStrikeResult.get("matchCount"));
-
+        for (String key : ballStrikeResult.keySet()) {
+            results.add(formatPrintSource(key, ballStrikeResult.get(key)));
+        }
         System.out.println(String.join(" ", results));
     }
     public String actionAfterGameEnd(int wordSize) {
@@ -29,13 +28,13 @@ public class MyView {
         return readLine();
     }
 
-    private void getPrintStrikeResult(ArrayList result,int strike){
-        if(strike>0)
-            result.add(strike + "스트라이크");
+    private String getPrintSource(String key,int data){
+        if(data > 0)
+            return printSources.get(key);
+        return "";
     }
-    private void getPrintBallResult(ArrayList result,int ball){
-        if(ball>0)
-            result.add(ball+"볼") ;
+    private String formatPrintSource(String key,int data){
+        return String.format(getPrintSource(key,data),data);
     }
     public MyView() {
         printSources = new HashMap<>();
