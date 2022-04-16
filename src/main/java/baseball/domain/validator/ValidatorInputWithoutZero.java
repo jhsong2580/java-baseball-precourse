@@ -16,8 +16,8 @@ public class ValidatorInputWithoutZero implements MyValidator {
     public boolean validate(int input) {
         boolean isWithoutZero = true;
         String inputCastString = String.valueOf(input);
-        for(int i=0;i<BASEBALL_ANSWER_SIZE;i++){
-            isWithoutZero = isWithoutZero && (inputCastString.charAt(i)!= '0');
+        for (int i = 0; i < BASEBALL_ANSWER_SIZE; i++) {
+            isWithoutZero = isWithoutZero && (inputCastString.charAt(i) != '0');
         }
         return isWithoutZero;
     }
