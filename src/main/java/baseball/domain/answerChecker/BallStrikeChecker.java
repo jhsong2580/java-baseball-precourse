@@ -31,10 +31,10 @@ public class BallStrikeChecker implements Checker {
         boolean[] numbersOfInput = initBooleanArrayDefaultFalse(10);
         int matchCount = 0;
         for (int i = 0; i < BASEBALL_ANSWER_SIZE; i++) {
-            numbersOfInput[answer.charAt(i) - ZERO_ASCII] = true;
+            numbersOfInput[answer.charAt(i) - ZERO_ASCII] = true; /* answer에 있는 숫자 칸마다 true로 변경 */
         }
         for (int i = 0; i < BASEBALL_ANSWER_SIZE; i++) {
-            matchCount += getIntFromBoolean(numbersOfInput[input.charAt(i) - ZERO_ASCII]);
+            matchCount += getIntFromBoolean(numbersOfInput[input.charAt(i) - ZERO_ASCII]); /* input에 있는 숫자 칸이 true라면 matching으로 판단 */
         }
         return matchCount;
     }
@@ -47,14 +47,14 @@ public class BallStrikeChecker implements Checker {
         return strikeCount;
     }
 
-    private int getIntFromBoolean(boolean flag) {
+    private int getIntFromBoolean(boolean flag) {/* 반환값 : 1(flag = true), 0(flag = false) */
         return 1 & Boolean.hashCode(flag) >> 1;
     }
 
     private boolean[] initBooleanArrayDefaultFalse(int size) {
-        boolean checkDupNumber[] = new boolean[size];
+        boolean checkDupNumber[] = new boolean[size]; /* 각 숫자별 선출된 기록을 저장 (ex : checkDupNumber[1] = true -> 1은 이미 선출되었다 */
         Arrays.fill(checkDupNumber, false);
-        checkDupNumber[0] = true;
+        checkDupNumber[0] = true; /* 0은 선출될수 없으므로 true로 셋팅 */
         return checkDupNumber;
     }
 

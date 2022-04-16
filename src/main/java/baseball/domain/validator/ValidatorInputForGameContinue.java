@@ -12,7 +12,7 @@ public class ValidatorInputForGameContinue implements MyValidator {
     @Override
     public boolean canValidate(boolean isEnd) { //게임 종료시 Input에 대한 처리 가능
         return isEnd;
-    }
+    } /*게임이 종료되었을때만 검증 가능하다*/
 
     @Override
     public boolean validate(int input) {

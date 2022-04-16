@@ -13,7 +13,7 @@ public class ValidatorInputDuplicateNumber implements MyValidator {
     @Override
     public boolean canValidate(boolean isEnd) {//게임중일때 검증 가능
         return !isEnd;
-    }
+    } /*게임중에만 검증 가능하다*/
 
     @Override
     public boolean validate(int input) {
