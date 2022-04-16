@@ -22,13 +22,19 @@ public class MyModel {
 
     public MyModel(int BASEBALL_ANSWER_SIZE) {
         this.BASEBALL_ANSWER_SIZE = BASEBALL_ANSWER_SIZE;
+        myValidators = getMyValidators(BASEBALL_ANSWER_SIZE);
+        myGenerator = new RandomNumberGenerator(BASEBALL_ANSWER_SIZE);
+        myChecker = new BallStrikeChecker(BASEBALL_ANSWER_SIZE);
+    }
+
+    private List<MyValidator> getMyValidators(int BASEBALL_ANSWER_SIZE) {
+        final List<MyValidator> myValidators;
         myValidators = new ArrayList<>();
         myValidators.add(new ValidatorInputCheckRange(BASEBALL_ANSWER_SIZE));
         myValidators.add(new ValidatorInputWithoutZero(BASEBALL_ANSWER_SIZE));
         myValidators.add(new ValidateInputDuplicateNumber(BASEBALL_ANSWER_SIZE));
         myValidators.add(new ValidateInputForGameContinue(CONTINUE_GAME, END_GAME));
-        myGenerator = new RandomNumberGenerator(BASEBALL_ANSWER_SIZE);
-        myChecker = new BallStrikeChecker(BASEBALL_ANSWER_SIZE);
+        return myValidators;
     }
 
     public void initGame() {
