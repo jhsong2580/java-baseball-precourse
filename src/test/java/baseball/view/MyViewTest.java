@@ -31,12 +31,12 @@ class MyViewTest {
             "3:0:0:3볼",
             "0:3:0:3스트라이크"
     }, delimiter = ':')
-    public void testPrintGuessResult(String ball, String strike, String isNothing, String output) {
+    public void testPrintGuessResult(String ball, String strike, String nothing, String output) {
         //given
         HashMap<String, Integer> ballStrikeResult = new HashMap<>();
         ballStrikeResult.put("ball", Integer.parseInt(ball));
         ballStrikeResult.put("strike", Integer.parseInt(strike));
-        ballStrikeResult.put("matchCount", Integer.parseInt(ball) + Integer.parseInt(strike));
+        ballStrikeResult.put("nothing", Integer.parseInt(nothing));
 
         OutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
