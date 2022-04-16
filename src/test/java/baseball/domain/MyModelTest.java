@@ -46,7 +46,7 @@ class MyModelTest {
     @DisplayName("게임중일때 입력값이 111~999숫자이고 0이 들어가지 않으면 정상")
     @ValueSource(strings = {"142", "346", "0921", "426", "987", "123", "972", "184"})
     public void validateNormalInputWhileGaming(String input) {
-        Assertions.assertThat(myModel.validateInput(input)).isTrue();
+        Assertions.assertThat(myModel.validateInput(input)).isEqualTo(input);
     }
 
     @ParameterizedTest
@@ -62,7 +62,7 @@ class MyModelTest {
     @ValueSource(strings = {"1", "2"})
     public void validateNormalInputWhileNotGaming(String input) {
         myModel.endGame();
-        Assertions.assertThat(myModel.validateInput(input)).isTrue();
+        Assertions.assertThat(myModel.validateInput(input)).isEqualTo(input);
     }
 
     @ParameterizedTest
