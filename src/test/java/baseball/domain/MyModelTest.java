@@ -1,6 +1,7 @@
 package baseball.domain;
 
 import org.assertj.core.api.Assertions;
+import org.assertj.core.api.MapAssert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
@@ -73,16 +74,18 @@ class MyModelTest {
 
     @ParameterizedTest
     @DisplayName("낫싱&볼&스트라이크 테스트")
-    @CsvSource(value = {"143:1:0:1","253:1:0:1","972:0:2:2","472:0:3:3","195:0:0:0"},delimiter = ':')
-    public void calcBallStrikeCountTest(String input,String ballCount, String strikeCount, String matchCount){
+    @CsvSource(value = {"143:1:0:1:0","253:1:0:1:0","972:0:2:2:0","472:0:3:3:0","195:0:0:0:1"},delimiter = ':')
+    public void calcBallStrikeCountTest(String input,String ballCount, String strikeCount, String matchCount,String nothing){
         myModel.setAnswer("472");
         HashMap<String, Integer> result = myModel.calcBallStrikeCount(input);
         Assertions.assertThat(result)
                 .isNotEmpty()
-                .containsExactly(entry("ball", Integer.parseInt(ballCount)),entry("strike", Integer.parseInt(strikeCount)),entry("matchCount", Integer.parseInt(matchCount)));
-
-
-
+                .containsExactly(
+                        entry("ball", Integer.parseInt(ballCount)),
+                        entry("strike", Integer.parseInt(strikeCount)),
+                        entry("nothing",Integer.parseInt(nothing)),
+                        entry("matchCount", Integer.parseInt(matchCount))
+                       );
     }
 
     @Test
