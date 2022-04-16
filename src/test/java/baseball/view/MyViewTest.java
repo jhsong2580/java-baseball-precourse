@@ -42,7 +42,7 @@ class MyViewTest {
         System.setOut(new PrintStream(out));
 
         //when
-        myView.printGuessResult(ballStrikeResult);
+        myView.printResult(ballStrikeResult);
 
         //then
         Assertions.assertThat(output.trim()).isEqualTo(out.toString().trim());
