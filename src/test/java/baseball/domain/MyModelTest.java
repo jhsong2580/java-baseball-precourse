@@ -12,6 +12,8 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.lang.reflect.Array;
 import java.util.*;
 
+import static org.assertj.core.api.Assertions.entry;
+
 class MyModelTest {
     MyModel myModel = new MyModel(3);
 
@@ -71,13 +73,13 @@ class MyModelTest {
 
     @ParameterizedTest
     @DisplayName("낫싱&볼&스트라이크 테스트")
-    @CsvSource(value = {"143:1:0:0","253:1:0:0","972:0:2:0","472:0:3:0","195:0:0:1"},delimiter = ':')
-    public void calcBallStrikeCountTest(String input,String ballCount, String strikeCount, String isNothing){
+    @CsvSource(value = {"143:1:0:1","253:1:0:1","972:0:2:2","472:0:3:3","195:0:0:0"},delimiter = ':')
+    public void calcBallStrikeCountTest(String input,String ballCount, String strikeCount, String matchCount){
         myModel.setAnswer("472");
-        List<Integer> result = myModel.calcBallStrikeCount(input);
+        HashMap<String, Integer> result = myModel.calcBallStrikeCount(input);
         Assertions.assertThat(result)
                 .isNotEmpty()
-                .containsExactly(Integer.parseInt(ballCount), Integer.parseInt(strikeCount), Integer.parseInt(isNothing));
+                .containsExactly(entry("ball", Integer.parseInt(ballCount)),entry("strike", Integer.parseInt(strikeCount)),entry("matchCount", Integer.parseInt(matchCount)));
 
 
 
@@ -90,10 +92,10 @@ class MyModelTest {
         myModel.setAnswer("472");
 
         //when
-        List<Integer> trueResult = myModel.calcBallStrikeCount("472");
-        boolean isAllStrikeExpectTrue = myModel.checkAllStrike(trueResult.get(1));
-        List<Integer> falseResult = myModel.calcBallStrikeCount("473");
-        boolean isAllStrikeExpectFalse = myModel.checkAllStrike(falseResult.get(1));
+        HashMap<String, Integer> trueResult = myModel.calcBallStrikeCount("472");
+        boolean isAllStrikeExpectTrue = myModel.checkAllStrike(trueResult.get("strike"));
+        HashMap<String, Integer> falseResult = myModel.calcBallStrikeCount("473");
+        boolean isAllStrikeExpectFalse = myModel.checkAllStrike(falseResult.get("strike"));
 
         //then
         Assertions.assertThat(isAllStrikeExpectTrue).isTrue();
