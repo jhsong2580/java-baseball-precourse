@@ -38,10 +38,10 @@ public class MyModel {
     public HashMap<String, Integer> calcBallStrikeCount(String input){
         HashMap<String, Integer> result = new HashMap<>();
 
-        result.put("matchCount", calcMatchCount(input));
+        int matchCount = calcMatchCount(input);
         result.put("strike", calcStrikeCount(input));
-        result.put("ball",result.get("matchCount") - result.get("strike"));
-        result.put("nothing",getIntFromBoolean(result.get("matchCount")==0));
+        result.put("ball",matchCount - result.get("strike"));
+        result.put("nothing",getIntFromBoolean(matchCount==0));
         return result;
     }
 
