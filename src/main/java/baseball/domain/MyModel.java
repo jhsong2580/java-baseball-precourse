@@ -58,7 +58,7 @@ public class MyModel {
     }
 
     private int calcMatchCount(String input){
-        boolean[] numbersOfInput = initDupCheckList();
+        boolean[] numbersOfInput = initBooleanArrayDefaultFalse(10);
         int matchCount = 0;
         for ( int i = 0; i < BASEBALL_ANSWER_SIZE; i++){
             numbersOfInput[answer.charAt(i) - (int)'0'] =true;
@@ -104,7 +104,7 @@ public class MyModel {
 
     private void generateRandomNumber(){
         StringBuilder stringBuilder = new StringBuilder();
-        boolean[] checkDupNumber = initDupCheckList();
+        boolean[] checkDupNumber = initBooleanArrayDefaultFalse(10);
         for(int i=0;i<BASEBALL_ANSWER_SIZE;i++)
             stringBuilder.append(getNumberNotDuplicate(checkDupNumber));
         answer = new String(stringBuilder);
@@ -119,8 +119,8 @@ public class MyModel {
         return value;
     }
 
-    private boolean[] initDupCheckList(){
-        boolean checkDupNumber[] = new boolean[10];
+    private boolean[] initBooleanArrayDefaultFalse(int size){
+        boolean checkDupNumber[] = new boolean[size];
         Arrays.fill(checkDupNumber,false);
         checkDupNumber[0] = true;
         return checkDupNumber;
