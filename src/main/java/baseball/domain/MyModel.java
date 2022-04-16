@@ -1,15 +1,14 @@
 package baseball.domain;
 
+import baseball.domain.answerChecker.BallStrikeChecker;
+import baseball.domain.answerChecker.Checker;
 import baseball.domain.generator.Generator;
 import baseball.domain.generator.RandomNumberGenerator;
 import baseball.domain.validator.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-
-import static camp.nextstep.edu.missionutils.Randoms.pickNumberInRange;
 
 public class MyModel {
     private final int BASEBALL_ANSWER_SIZE;
@@ -18,6 +17,7 @@ public class MyModel {
     private final int ZERO_ASCII = (int) '0';
     private final List<MyValidator> myValidators;
     private final Generator myGenerator;
+    private final Checker myChecker;
     private String answer = "";
     private boolean isEnd = false;
 
