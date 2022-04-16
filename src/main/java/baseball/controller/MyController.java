@@ -3,7 +3,8 @@ package baseball.controller;
 import baseball.domain.MyModel;
 import baseball.view.MyView;
 
-import static camp.nextstep.edu.missionutils.Console.readLine;
+import java.util.HashMap;
+
 
 public class MyController {
     private final MyModel myModel;
@@ -14,4 +15,15 @@ public class MyController {
         this.myView = myView;
     }
 
+    private void initGame() {
+        myModel.initGame();
+        int strikeCount = -1;
+        do {
+            String input = myModel.validateInput(myView.getInput());
+            HashMap<String, Integer> ballStrikeResult = myModel.calcBallStrikeCount(input);
+            myView.printResult(ballStrikeResult);
+            strikeCount = ballStrikeResult.get("strike");
+        } while (!myModel.checkAllStrike(strikeCount));
+        myModel.endGame();
+    }
 }
