@@ -32,8 +32,8 @@ public class MyModel {
         myValidators = new ArrayList<>();
         myValidators.add(new ValidatorInputCheckRange(BASEBALL_ANSWER_SIZE));
         myValidators.add(new ValidatorInputWithoutZero(BASEBALL_ANSWER_SIZE));
-        myValidators.add(new ValidateInputDuplicateNumber(BASEBALL_ANSWER_SIZE));
-        myValidators.add(new ValidateInputForGameContinue(CONTINUE_GAME, END_GAME));
+        myValidators.add(new ValidatorInputDuplicateNumber(BASEBALL_ANSWER_SIZE));
+        myValidators.add(new ValidatorInputForGameContinue(CONTINUE_GAME, END_GAME));
         return myValidators;
     }
 

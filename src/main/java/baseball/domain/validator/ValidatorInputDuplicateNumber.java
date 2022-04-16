@@ -3,10 +3,10 @@ package baseball.domain.validator;
 import java.util.HashSet;
 import java.util.Set;
 
-public class ValidateInputDuplicateNumber implements MyValidator {
+public class ValidatorInputDuplicateNumber implements MyValidator {
     private final int BASEBALL_ANSWER_SIZE;
 
-    public ValidateInputDuplicateNumber(int BASEBALL_ANSWER_SIZE) {
+    public ValidatorInputDuplicateNumber(int BASEBALL_ANSWER_SIZE) {
         this.BASEBALL_ANSWER_SIZE = BASEBALL_ANSWER_SIZE;
     }
 
@@ -19,8 +19,8 @@ public class ValidateInputDuplicateNumber implements MyValidator {
     public boolean validate(int input) {
         String source = String.valueOf(input);
         Set<Character> sourceCharacters = new HashSet<>();
-        for(int i=0;i<BASEBALL_ANSWER_SIZE;i++)
+        for (int i = 0; i < BASEBALL_ANSWER_SIZE; i++)
             sourceCharacters.add(source.charAt(i));
-        return sourceCharacters.size()==BASEBALL_ANSWER_SIZE;
+        return sourceCharacters.size() == BASEBALL_ANSWER_SIZE;
     }
 }

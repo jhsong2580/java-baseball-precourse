@@ -1,10 +1,10 @@
 package baseball.domain.validator;
 
-public class ValidateInputForGameContinue implements MyValidator {
+public class ValidatorInputForGameContinue implements MyValidator {
     private final int CONTINUE_GAME;
     private final int END_GAME;
 
-    public ValidateInputForGameContinue(int CONTINUE_GAME, int END_GAME) {
+    public ValidatorInputForGameContinue(int CONTINUE_GAME, int END_GAME) {
         this.CONTINUE_GAME = CONTINUE_GAME;
         this.END_GAME = END_GAME;
     }
