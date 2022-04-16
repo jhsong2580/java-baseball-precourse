@@ -7,7 +7,7 @@ import java.util.List;
 import static camp.nextstep.edu.missionutils.Console.readLine;
 
 public class MyView {
-    public void printGuessResult(int strike, int ball, int isNothing) {
+    public void printResult(HashMap<String, Integer> ballStrikeResult) {
         ArrayList<String> results = new ArrayList<>();
         getPrintBallResult(results, ballStrikeResult.get("ball"));
         getPrintStrikeResult(results, ballStrikeResult.get("strike"));
