@@ -29,8 +29,10 @@ public class MyModel {
     public boolean validateInput(String input){
         int inputCast = parseStringToInteger(input);
         boolean validateResult = validateInputNotInGame(inputCast) && validateInputInGame(inputCast);
-        if(!validateResult)
+        if(!validateResult){
+            System.out.println("게임 종료");
             throw new IllegalArgumentException();
+        }
         return true;
 
     }
