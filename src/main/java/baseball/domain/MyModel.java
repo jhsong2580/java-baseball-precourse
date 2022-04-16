@@ -52,11 +52,14 @@ public class MyModel {
     private int calcStrikeCount(String input){
         int strikeCount = 0;
         for(int i=0;i<BASEBALL_ANSWER_SIZE;i++){
-            strikeCount += 1 & Boolean.hashCode(input.charAt(i) == answer.charAt(i)) >> 1;
+            strikeCount += getIntFromBoolean(input.charAt(i) == answer.charAt(i));
         }
         return strikeCount;
     }
 
+    private int getIntFromBoolean(boolean flag){
+        return 1 & Boolean.hashCode(flag) >> 1;
+    }
     private int calcMatchCount(String input){
         boolean[] numbersOfInput = initBooleanArrayDefaultFalse(10);
         int matchCount = 0;
@@ -64,7 +67,7 @@ public class MyModel {
             numbersOfInput[answer.charAt(i) - ZERO_ASCII] =true;
         }
         for ( int i = 0; i < BASEBALL_ANSWER_SIZE; i++){
-            matchCount += 1&Boolean.hashCode(numbersOfInput[input.charAt(i) - ZERO_ASCII] ) >> 1;
+            matchCount += getIntFromBoolean(numbersOfInput[input.charAt(i) - ZERO_ASCII] );
         }
         return matchCount;
     }
