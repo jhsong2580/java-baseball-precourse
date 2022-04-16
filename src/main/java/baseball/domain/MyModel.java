@@ -29,6 +29,7 @@ public class MyModel {
         myValidators.add(new ValidateInputDuplicateNumber(BASEBALL_ANSWER_SIZE));
         myValidators.add(new ValidateInputForGameContinue(CONTINUE_GAME, END_GAME));
         myGenerator = new RandomNumberGenerator(BASEBALL_ANSWER_SIZE);
+        myChecker = new BallStrikeChecker(BASEBALL_ANSWER_SIZE);
     }
 
     public void initGame() {
@@ -59,17 +60,11 @@ public class MyModel {
     }
 
     public HashMap<String, Integer> calcBallStrikeCount(String input) {
-        HashMap<String, Integer> result = new HashMap<>();
-
-        int matchCount = calcMatchCount(input);
-        result.put("strike", calcStrikeCount(input));
-        result.put("ball", matchCount - result.get("strike"));
-        result.put("nothing", getIntFromBoolean(matchCount == 0));
-        return result;
+        return myChecker.calcBallStrikeCount(answer, input);
     }
 
     public boolean checkAllStrike(int strikeCount) {
-        return strikeCount == BASEBALL_ANSWER_SIZE;
+        return myChecker.checkAllStrike(strikeCount);
     }
 
     private int calcStrikeCount(String input) {
