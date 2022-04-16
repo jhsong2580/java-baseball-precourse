@@ -27,15 +27,21 @@ public class MyModel {
         isEnd = true;
     }
 
-    public boolean validateInput(String input){
+    public boolean validateInput(String input) {
         int inputCast = parseStringToInteger(input);
-        boolean validateResult = validateInputNotInGame(inputCast) && validateInputInGame(inputCast);
-        if(!validateResult){
+        boolean validateResult = true;
+        for (int i=0;i<myValidators.size()&validateResult;i++) {
+            validateResult = validateResult&validateExecute(myValidators.get(i),inputCast);
+        }
+        if (!validateResult) {
             System.out.println("게임 종료");
             throw new IllegalArgumentException();
         }
+        return validateResult;
+    }
+    private boolean validateExecute(MyValidator validator,int input){
+        if(validator.canValidate(isEnd)) return validator.validate(input);
         return true;
-
     }
 
     public HashMap<String, Integer> calcBallStrikeCount(String input){
