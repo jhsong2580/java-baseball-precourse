@@ -14,7 +14,6 @@ public class MyModel {
     private final int BASEBALL_ANSWER_SIZE;
     private final int CONTINUE_GAME = 1;
     private final int END_GAME = 2;
-    private final int ZERO_ASCII = (int) '0';
     private final List<MyValidator> myValidators;
     private final Generator myGenerator;
     private final Checker myChecker;
@@ -67,60 +66,12 @@ public class MyModel {
         return myChecker.checkAllStrike(strikeCount);
     }
 
-    private int calcStrikeCount(String input) {
-        int strikeCount = 0;
-        for (int i = 0; i < BASEBALL_ANSWER_SIZE; i++) {
-            strikeCount += getIntFromBoolean(input.charAt(i) == answer.charAt(i));
-        }
-        return strikeCount;
-    }
-
-    private int getIntFromBoolean(boolean flag) {
-        return 1 & Boolean.hashCode(flag) >> 1;
-    }
-
-    private int calcMatchCount(String input) {
-        boolean[] numbersOfInput = initBooleanArrayDefaultFalse(10);
-        int matchCount = 0;
-        for (int i = 0; i < BASEBALL_ANSWER_SIZE; i++) {
-            numbersOfInput[answer.charAt(i) - ZERO_ASCII] = true;
-        }
-        for (int i = 0; i < BASEBALL_ANSWER_SIZE; i++) {
-            matchCount += getIntFromBoolean(numbersOfInput[input.charAt(i) - ZERO_ASCII]);
-        }
-        return matchCount;
-    }
-
     private int parseStringToInteger(String input) {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException();
         }
-    }
-
-    private void generateRandomNumber() {
-        StringBuilder stringBuilder = new StringBuilder();
-        boolean[] checkDupNumber = initBooleanArrayDefaultFalse(10);
-        for (int i = 0; i < BASEBALL_ANSWER_SIZE; i++)
-            stringBuilder.append(getNumberNotDuplicate(checkDupNumber));
-        answer = new String(stringBuilder);
-    }
-
-    private int getNumberNotDuplicate(boolean[] checkDupNumber) {
-        int value = 0;
-        while (checkDupNumber[value]) {
-            value = pickNumberInRange(1, 9);
-        }
-        checkDupNumber[value] = true;
-        return value;
-    }
-
-    private boolean[] initBooleanArrayDefaultFalse(int size) {
-        boolean checkDupNumber[] = new boolean[size];
-        Arrays.fill(checkDupNumber, false);
-        checkDupNumber[0] = true;
-        return checkDupNumber;
     }
 
     public int getBASEBALL_ANSWER_SIZE() {
