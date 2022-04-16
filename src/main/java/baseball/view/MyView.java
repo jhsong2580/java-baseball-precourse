@@ -1,5 +1,7 @@
 package baseball.view;
 
+import org.junit.jupiter.api.Test;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -7,6 +9,7 @@ import java.util.List;
 import static camp.nextstep.edu.missionutils.Console.readLine;
 
 public class MyView {
+    private final HashMap<String,String> printSources ;
     public void printResult(HashMap<String, Integer> ballStrikeResult) {
         ArrayList<String> results = new ArrayList<>();
         getPrintBallResult(results, ballStrikeResult.get("ball"));
@@ -34,8 +37,10 @@ public class MyView {
         if(ball>0)
             result.add(ball+"볼") ;
     }
-    private void getPrintNothingResult(ArrayList result,int isNothing){
-        if(isNothing==0)
-            result.add("낫싱") ;
+    public MyView() {
+        printSources = new HashMap<>();
+        printSources.put("ball", "%d볼");
+        printSources.put("strike", "%d스트라이크");
+        printSources.put("nothing", "낫싱");
     }
 }
