@@ -57,7 +57,7 @@ public class MyModel {
             System.out.println("게임 종료");
             throw new IllegalArgumentException();
         }
-        return input; /* 모든 validate 성공시 받았던 input 반환 */
+        return String.valueOf(inputCast); /* 모든 validate 성공시 받았던 input 반환 */
     }
 
     private boolean validateExecute(MyValidator validator, int input) {
