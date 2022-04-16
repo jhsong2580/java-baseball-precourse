@@ -15,6 +15,15 @@ public class MyController {
         this.myView = myView;
     }
 
+    public void excute() {
+        String input = "";
+        do {
+            initGame();
+            input = myView.actionAfterGameEnd(myModel.getBASEBALL_ANSWER_SIZE());
+            myModel.validateInput(input);
+        } while (input.equals("1"));
+    }
+
     private void initGame() {
         myModel.initGame();
         int strikeCount = -1;
