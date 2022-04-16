@@ -1,5 +1,7 @@
 package baseball.domain;
 
+import baseball.domain.generator.Generator;
+import baseball.domain.generator.RandomNumberGenerator;
 import baseball.domain.validator.*;
 
 import java.util.ArrayList;
@@ -15,23 +17,23 @@ public class MyModel {
     private final int END_GAME = 2;
     private final int ZERO_ASCII = (int) '0';
     private final List<MyValidator> myValidators;
+    private final Generator myGenerator;
     private String answer = "";
     private boolean isEnd = false;
 
     public MyModel(int BASEBALL_ANSWER_SIZE) {
         this.BASEBALL_ANSWER_SIZE = BASEBALL_ANSWER_SIZE;
-
         myValidators = new ArrayList<>();
         myValidators.add(new ValidatorInputCheckRange(BASEBALL_ANSWER_SIZE));
         myValidators.add(new ValidatorInputWithoutZero(BASEBALL_ANSWER_SIZE));
         myValidators.add(new ValidateInputDuplicateNumber(BASEBALL_ANSWER_SIZE));
         myValidators.add(new ValidateInputForGameContinue(CONTINUE_GAME, END_GAME));
+        myGenerator = new RandomNumberGenerator(BASEBALL_ANSWER_SIZE);
     }
 
     public void initGame() {
         isEnd = false;
-        answer = "";
-        generateRandomNumber();
+        answer = myGenerator.generateRandomNumber();
     }
 
     public void endGame() {
