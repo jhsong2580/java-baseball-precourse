@@ -10,6 +10,7 @@ public class MyModel {
     private final int BASEBALL_ANSWER_SIZE;
     private final int CONTINUE_GAME = 1;
     private final int END_GAME = 2;
+    private final int ZERO_ASCII = (int)'0';
     private String answer="";
     private boolean isEnd=false;
 
@@ -61,10 +62,10 @@ public class MyModel {
         boolean[] numbersOfInput = initBooleanArrayDefaultFalse(10);
         int matchCount = 0;
         for ( int i = 0; i < BASEBALL_ANSWER_SIZE; i++){
-            numbersOfInput[answer.charAt(i) - (int)'0'] =true;
+            numbersOfInput[answer.charAt(i) - ZERO_ASCII] =true;
         }
         for ( int i = 0; i < BASEBALL_ANSWER_SIZE; i++){
-            matchCount += 1&Boolean.hashCode(numbersOfInput[input.charAt(i) - (int)'0'] ) >> 1;
+            matchCount += 1&Boolean.hashCode(numbersOfInput[input.charAt(i) - ZERO_ASCII] ) >> 1;
         }
         return matchCount;
     }
