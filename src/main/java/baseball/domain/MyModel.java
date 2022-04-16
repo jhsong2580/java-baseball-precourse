@@ -1,5 +1,7 @@
 package baseball.domain;
 
+import baseball.domain.validator.*;
+
 import java.util.*;
 
 import static camp.nextstep.edu.missionutils.Randoms.pickNumberInRange;
@@ -10,11 +12,10 @@ public class MyModel {
     private final int BASEBALL_ANSWER_SIZE;
     private final int CONTINUE_GAME = 1;
     private final int END_GAME = 2;
-    private final int ZERO_ASCII = (int)'0';
-    private String answer="";
-    private boolean isEnd=false;
-
-
+    private final int ZERO_ASCII = (int) '0';
+    private String answer = "";
+    private boolean isEnd = false;
+    private final List<MyValidator> myValidators;
 
     public void initGame(){
         isEnd = false;
@@ -165,7 +166,11 @@ public class MyModel {
 
     public MyModel(int BASEBALL_ANSWER_SIZE) {
         this.BASEBALL_ANSWER_SIZE = BASEBALL_ANSWER_SIZE;
-        this.BASEBALL_MAX = (int)Math.pow(10,BASEBALL_ANSWER_SIZE) -1;
-        this.BASEBALL_MIN = (int)Math.pow(10,BASEBALL_ANSWER_SIZE-1);
+
+        myValidators = new ArrayList<>();
+        myValidators.add(new ValidatorInputCheckRange(BASEBALL_ANSWER_SIZE));
+        myValidators.add(new ValidatorInputWithoutZero(BASEBALL_ANSWER_SIZE));
+        myValidators.add(new ValidateInputDuplicateNumber(BASEBALL_ANSWER_SIZE));
+        myValidators.add(new ValidateInputForGameContinue(CONTINUE_GAME, END_GAME));
     }
 }
