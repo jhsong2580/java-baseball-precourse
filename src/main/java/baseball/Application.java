@@ -1,6 +1,7 @@
 package baseball;
 
 //import baseball.controller.MyController;
+
 import baseball.controller.MyController;
 import baseball.domain.MyModel;
 import baseball.view.MyView;
@@ -11,7 +12,7 @@ public class Application {
         MyModel model = new MyModel(3);
         MyView view = new MyView();
         MyController controller = new MyController(model, view);
- 
 
+        controller.excute();
     }
 }
